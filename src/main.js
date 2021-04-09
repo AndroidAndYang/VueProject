@@ -7,6 +7,9 @@ import ElementUI, {Message} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 // 使用ElementUi
 Vue.use(ElementUI)
+// 树形表格
+import TableTree from 'vue-table-with-tree-grid'
+Vue.component('tree-table', TableTree)
 
 // 字体图标Css
 import './assets/fonts/iconfont.css';
