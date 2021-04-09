@@ -132,7 +132,6 @@ export default {
   display: flex;
   padding-right: 20px;
   justify-content: flex-end;
-
 }
 
 </style>

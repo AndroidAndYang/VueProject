@@ -5,6 +5,11 @@ html, body, #app {
     margin: 0;
 }
 
+.content-left {
+    display: flex;
+    justify-items: left;
+}
+
 /*面包屑*/
 .el-breadcrumb {
     margin-bottom: 15px;
