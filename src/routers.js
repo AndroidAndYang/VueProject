@@ -8,6 +8,9 @@ import List from './components/user/UserList'
 import Welcome from './components/home/Welcome'
 import Roles from './components/permission/Roles'
 import Rights from './components/permission/Rights'
+import Goods from './components/goods/List'
+import Params from './components/goods/Params'
+import Cate from './components/goods/Cate'
 
 Vue.use(Router)
 
@@ -33,6 +36,12 @@ var router = new Router({
                 {path: '/roles', component: Roles},
                 // 权限列表
                 {path: '/rights', component: Rights},
+                // 商品列表
+                {path: '/goods', component: Goods},
+                // 商品列表 -> 分类参数
+                {path: '/params', component: Params},
+                // 商品分类
+                {path: '/categories', component: Cate}
             ]
         },
     ]

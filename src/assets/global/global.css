@@ -10,6 +10,11 @@ html, body, #app {
     justify-items: left;
 }
 
+.el-pagination {
+    display: flex;
+    justify-items: left;
+}
+
 /*面包屑*/
 .el-breadcrumb {
     margin-bottom: 15px;
