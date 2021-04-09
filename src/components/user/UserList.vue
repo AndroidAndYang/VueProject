@@ -29,18 +29,15 @@
 
         <el-table-column
             prop="username"
-            label="姓名"
-            width="180"/>
+            label="姓名"/>
 
         <el-table-column
-            width="200"
             prop="email"
             label="邮箱"/>
 
         <el-table-column
             prop="mobile"
-            label="电话"
-            width="180"/>
+            label="电话"/>
 
         <el-table-column
             prop="role_name"
@@ -57,6 +54,7 @@
         </el-table-column>
 
         <el-table-column
+            width="210"
             prop="date"
             label="操作">
           <template slot-scope="scope">
@@ -125,10 +123,14 @@
     </el-dialog>
 
     <!-- 分配角色的对话框 -->
-    <el-dialog title="分配角色" :visible.sync="setRoleDialogVisible" width="50%" @close="setRoleDialogClosed">
-      <div>
+    <el-dialog title="分配角色" :visible.sync="setRoleDialogVisible" width="40%" @close="setRoleDialogClosed">
+      <div class="role-content">
         <p>当前的用户：{{ userInfo.username }}</p>
+      </div>
+      <div class="role-content">
         <p>当前的角色：{{ userInfo.role_name }}</p>
+      </div>
+      <div class="role-content">
         <p>分配新角色：
           <el-select v-model="selectedRoleId" placeholder="请选择">
             <el-option v-for="item in rolesList" :key="item.id" :label="item.roleName" :value="item.id">
@@ -169,7 +171,6 @@ export default {
     var checkMobile = (rule, value, cb) => {
       // 验证手机号的正则表达式
       const regMobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/
-
       if (regMobile.test(value)) {
         return cb()
       }
@@ -390,6 +391,11 @@ export default {
 <style scoped>
 
 .el-pagination {
+  display: flex;
+  justify-items: left;
+}
+
+.role-content {
   display: flex;
   justify-items: left;
 }

@@ -24,7 +24,6 @@
               <i :class='iconsObj[menuItem.id]'></i>
               <span>{{ menuItem.authName }}</span>
             </template>
-
             <el-menu-item :index="'/' + childrenItem.path" v-for="childrenItem in menuItem.children"
                           :key="childrenItem.id" @click="saveNavState('/' + childrenItem.path)">
               <template slot='title'>
@@ -140,12 +139,20 @@ export default {
   cursor: pointer;
 }
 
+.el-submenu {
+    text-align: left!important;
+}
+
 .iconfont {
   margin-right: 10px;
 }
 
 .el-menu {
   border-right: none;
+}
+
+.el-menu .el-menu-item:nth-child(1){
+  text-align: left!important;
 }
 
 .el-aside {

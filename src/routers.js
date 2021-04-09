@@ -6,6 +6,8 @@ import Login from './components/user/Login'
 import Home from './components/home/Home'
 import List from './components/user/UserList'
 import Welcome from './components/home/Welcome'
+import Roles from './components/permission/Roles'
+import Rights from './components/permission/Rights'
 
 Vue.use(Router)
 
@@ -21,10 +23,16 @@ var router = new Router({
         {
             // 首页
             path: '/home', component: Home, children: [
+                // 首页默认路径
                 {path: "/", component: Welcome},
+                // 首页
                 {path: "/welcome", component: Welcome},
                 // 用户列表
-                {path: '/users', component: List}
+                {path: '/users', component: List},
+                // 角色列表
+                {path: '/roles', component: Roles},
+                // 权限列表
+                {path: '/rights', component: Rights},
             ]
         },
     ]
