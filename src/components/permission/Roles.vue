@@ -111,6 +111,33 @@
       </span>
     </el-dialog>
 
+    <el-dialog
+        title="分配权限"
+        :visible.sync="setRoleDialogVisible"
+        width="50%"
+        @close="setRightDialogClosed">
+      <!--
+          data：tree 数据
+          props: Tree显示的数据名
+          default-checked-keys：默认选择的数据，需要指定 node-key
+          default-expand-all：默认展开所有节点
+          check-on-click-node：不点击checkbox就可以选中
+      -->
+      <el-tree
+          :data="rightListData"
+          :props="roleTree"
+          :default-checked-keys="defKeys"
+          node-key="id"
+          show-checkbox
+          default-expand-all
+          check-on-click-node
+          ref="treeRef">
+      </el-tree>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRoleDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="allotRights">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -146,7 +173,19 @@ export default {
       editRoleRules: {
         roleName: "",
         roleDesc: ""
-      }
+      },
+      // 分配用户权限对话框的控制
+      setRoleDialogVisible: false,
+      // 显示的属性
+      roleTree: {
+        label: "authName",
+        children: "children"
+      },
+      // tree 数据
+      rightListData: [],
+      // 默认选中的节点Id值数组
+      defKeys: [],
+      roleId: ''
     }
   },
   created() {
@@ -178,7 +217,6 @@ export default {
     },
     // 编辑角色
     async editRoles(role) {
-
       var res = await this.$retrofit.get('roles/' + role.id)
       if (res.meta.status !== 200) {
         return this.$message.error(res.meta.msg)
@@ -230,10 +268,6 @@ export default {
       this.$message.success(res.meta.msg)
       await this.getRolesList()
     },
-    // 分配角色
-    setRoles(role) {
-      console.log(role)
-    },
     // 删除权限
     async removeRightById(role, rightId) {
       // 弹框提示用户是否要删除
@@ -257,6 +291,53 @@ export default {
       }
       // 返回的data, 是当前角色下最新的权限数据；所以重新赋值给当前的所有children对象
       role.children = res.data
+    },
+    // 分配角色
+    async setRoles(role) {
+      // 记录角色id，分配时需要角色id
+      this.roleId = role.id
+      // 获取所有权限的数据
+      const res = await this.$retrofit.get('rights/tree')
+      if (res.meta.status !== 200) {
+        return this.$message.error('获取权限数据失败！')
+      }
+      // 把获取到的权限数据保存到 data 中
+      this.rightListData = res.data
+      // 递归获取三级节点的Id
+      this.getLeafKeys(role, this.defKeys)
+      console.log(this.defKeys)
+      this.setRoleDialogVisible = true
+    },
+    // 监听分配权限对话框的关闭事件
+    setRightDialogClosed() {
+      // 清空默认选择的节点
+      this.defKeys = []
+    },
+    // 通过递归的形式，获取角色下所有三级权限的id，并保存到 defKeys 数组中
+    getLeafKeys(node, arr) {
+      // 如果当前 node 节点不包含 children 属性，则是三级节点
+      if (!node.children) {
+        return arr.push(node.id)
+      }
+      node.children.forEach(item => this.getLeafKeys(item, arr))
+    },
+    // 分配权限
+    async allotRights() {
+      const keys = [
+        ...this.$refs.treeRef.getCheckedKeys(),
+        ...this.$refs.treeRef.getHalfCheckedKeys()
+      ]
+      const idStr = keys.join(',')
+      const res = await this.$retrofit.post(
+          `roles/${this.roleId}/rights`,
+          {rids: idStr}
+      )
+      if (res.meta.status !== 200) {
+        return this.$message.error('分配权限失败！')
+      }
+      this.$message.success('分配权限成功！')
+      await this.getRolesList()
+      this.setRoleDialogVisible = false
     }
   }
 }
