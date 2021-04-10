@@ -16,6 +16,18 @@ import './assets/fonts/iconfont.css';
 // 根css
 import './assets/global/global.css';
 
+// 富文本编辑器
+import VueQuillEditor from 'vue-quill-editor';
+// require styles 导入富文本编辑器对应的样式
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+
+
+// 富文本注册
+Vue.use(VueQuillEditor)
+
 // 网络库
 import axios from 'axios';
 

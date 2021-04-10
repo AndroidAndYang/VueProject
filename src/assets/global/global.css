@@ -3,6 +3,7 @@ html, body, #app {
     height: 100%;
     padding: 0;
     margin: 0;
+    min-width: 1366px;
 }
 
 .content-left {
@@ -26,7 +27,7 @@ html, body, #app {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* 表格、tab、分页 */
-.el-table,.el-tabs,.el-pagination {
+/* 表格、tab、分页,步骤进度 */
+.el-table, .el-tabs, .el-pagination, .el-steps {
     margin-top: 15px;
 }

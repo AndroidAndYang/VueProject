@@ -3,13 +3,23 @@ import Router from 'vue-router'
 
 // 导入login页面
 import Login from './components/user/Login'
+// 主页
 import Home from './components/home/Home'
+// 用户列表
 import List from './components/user/UserList'
+// 欢迎页
 import Welcome from './components/home/Welcome'
+// 角色列表
 import Roles from './components/permission/Roles'
+// 权限列表
 import Rights from './components/permission/Rights'
+// 商品列表
 import Goods from './components/goods/List'
+// 添加商品
+import addGoods from './components/goods/Add'
+// 分类参数
 import Params from './components/goods/Params'
+// 商品分类
 import Cate from './components/goods/Cate'
 
 Vue.use(Router)
@@ -41,7 +51,9 @@ var router = new Router({
                 // 商品列表 -> 分类参数
                 {path: '/params', component: Params},
                 // 商品分类
-                {path: '/categories', component: Cate}
+                {path: '/categories', component: Cate},
+                // 添加商品
+                {path: '/addGoods', component: addGoods}
             ]
         },
     ]
