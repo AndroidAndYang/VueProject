@@ -14,7 +14,7 @@
           </el-input>
         </el-col>
         <el-col :span="2">
-          <el-button type="primary" @click="addGoodsDialogVisible = true">添加商品</el-button>
+          <el-button type="primary" @click="addCate">添加商品</el-button>
         </el-col>
       </el-row>
       <el-table
@@ -93,7 +93,10 @@ export default {
       this.queryInfo.pagenum = val
       this.getGoodsList()
     },
-
+    // 添加商品
+    addCate() {
+      this.$router.push("/addGoods")
+    },
     // 删除商品
     async removeById(id) {
       const confirmResult = await this.$confirm(
