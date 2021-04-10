@@ -247,10 +247,7 @@ export default {
     },
     // currentPage 改变时会触发
     handleCurrentChange(val) {
-      console.log("current page = " + val)
-      console.log("current pagenum = " + this.queryInfo.pagenum)
       this.queryInfo.pagenum = val
-      console.log("change pagenum = " + this.queryInfo.pagenum)
       this.getUserList()
     },
     // 获取用户列表
@@ -389,11 +386,6 @@ export default {
 </script>
 
 <style scoped>
-
-.el-pagination {
-  display: flex;
-  justify-items: left;
-}
 
 .role-content {
   display: flex;

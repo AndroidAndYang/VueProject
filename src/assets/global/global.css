@@ -10,6 +10,11 @@ html, body, #app {
     justify-items: left;
 }
 
+.el-pagination {
+    display: flex;
+    justify-items: left;
+}
+
 /*面包屑*/
 .el-breadcrumb {
     margin-bottom: 15px;
@@ -21,12 +26,7 @@ html, body, #app {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* 表格 */
-.el-table {
-    margin-top: 15px;
-}
-
-/* 分页 */
-.el-pagination {
+/* 表格、tab、分页 */
+.el-table,.el-tabs,.el-pagination {
     margin-top: 15px;
 }

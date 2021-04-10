@@ -7,6 +7,9 @@ import ElementUI, {Message} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 // 使用ElementUi
 Vue.use(ElementUI)
+// 树形表格
+import TableTree from 'vue-table-with-tree-grid'
+Vue.component('tree-table', TableTree)
 
 // 字体图标Css
 import './assets/fonts/iconfont.css';
@@ -62,6 +65,20 @@ Vue.prototype.showDialog = function (title, message, click) {
     });
 }
 
+// 时间转换
+Vue.filter('dateFormat', function(originVal) {
+    const dt = new Date(originVal)
+
+    const y = dt.getFullYear()
+    const m = (dt.getMonth() + 1 + '').padStart(2, '0')
+    const d = (dt.getDate() + '').padStart(2, '0')
+
+    const hh = (dt.getHours() + '').padStart(2, '0')
+    const mm = (dt.getMinutes() + '').padStart(2, '0')
+    const ss = (dt.getSeconds() + '').padStart(2, '0')
+
+    return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+})
 
 Vue.config.productionTip = false
 new Vue({
